@@ -7,34 +7,28 @@ using System.Threading.Tasks;
 
 namespace Snake.Logic
 {
-    public struct Segment
+    public struct Point
     {
-        public int X = 0;
-        public int Y = 0;
+        public int X;
+        public int Y;
     }
 
     public class Snake
     {
-        Queue<Segment> segments;
+        Queue<Point> segments;
 
-        public Snake()
+        public Snake(int length)
         {
-            segments = new Queue<Segment>();
+            segments = new Queue<Point>();
+            for(int i = 0; i < length; i++)
+            {
+                segments.Enqueue(new Point { X = i });
+            }
         }
 
-        public void AddSegment(Segment segment)
+        public void AddSegment(Direction direction)
         {
-            segments.Enqueue(segment);
-        }
-
-        public Segment DeleteSegment()
-        {
-            return segments.Dequeue();
-        }
-
-        public void Move(Direction direction)
-        {
-            Segment newSegment = segments.Last();
+            Point newSegment = segments.Last();
 
             switch(direction)
             {
@@ -45,7 +39,32 @@ namespace Snake.Logic
             }
 
             segments.Enqueue(newSegment);
-            segments.Dequeue();
+        }
+
+        public bool EqualsNewSegment(Point point)
+        {
+            return point.Equals(segments.Last());
+        }
+
+        public bool IsSegment()
+        {
+            return segments.Any(s => s.Equals(segments.Last()));
+        }
+
+        public Point GetNewSegment()
+        {
+            return segments.Last();
+        }
+
+        public bool IsRegion(int size_x, int size_y)
+        {
+            var segment = segments.Last();
+            return !(segment.X < 0 || segment.X >= size_x || segment.Y < 0 || segment.Y >= size_y);
+        }
+
+        public Point DeleteSegment()
+        {
+            return segments.Dequeue();
         }
     }
 }

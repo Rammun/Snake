@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Snake.Logic.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,12 @@ namespace Snake.Logic.Interfaces
 {
     public interface IGame
     {
-        public void Initialization(int x, int y);
-        public void Start();
-        public void Step();
-        public void Stop();
+        void Initialization(int x, int y);
+        void Start();
+        void Step();
+        void Stop();
+        void Intstruction(Direction direction);
+
+        GameState State { get; }
     }
 }
