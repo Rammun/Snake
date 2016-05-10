@@ -8,7 +8,7 @@ namespace Snake.Logic.Interfaces
 {
     public interface IGame
     {
-        public void Initialization();
+        public void Initialization(int x, int y);
         public void Start();
         public void Step();
         public void Stop();

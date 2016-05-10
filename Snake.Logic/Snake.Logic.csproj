@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\Direction.cs" />
     <Compile Include="Interfaces\IGame.cs" />
+    <Compile Include="Enums\Item.cs" />
+    <Compile Include="Snake.cs" />
     <Compile Include="SnakeGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

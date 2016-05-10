@@ -1,4 +1,5 @@
-﻿using Snake.Logic.Interfaces;
+﻿using Snake.Logic.Enums;
+using Snake.Logic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,17 @@ namespace Snake.Logic
 {
     public class SnakeGame : IGame
     {
-        public void Initialization()
+        Item[,] region;
+        Direction currentDirection;
+
+        public SnakeGame()
         {
-            throw new NotImplementedException();
+            Initialization(30, 40);
+        }
+        public void Initialization(int x, int y)
+        {
+            region = new Item[x, y];
+            currentDirection = Direction.Right;
         }
 
         public void Start()
