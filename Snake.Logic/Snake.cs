@@ -11,6 +11,12 @@ namespace Snake.Logic
     {
         public int X;
         public int Y;
+
+        public Point(int x = 1, int y = 1)
+        {
+            X = x;
+            Y = y;
+        }
     }
 
     public class Snake
@@ -20,11 +26,13 @@ namespace Snake.Logic
         public Snake(int length)
         {
             segments = new Queue<Point>();
-            for(int i = 0; i < length; i++)
+            for(int i = 1; i <= length; i++)
             {
-                segments.Enqueue(new Point { X = i });
+                segments.Enqueue(new Point(x: i));
             }
         }
+
+        public IEnumerable<Point> Segments { get { return segments; } }
 
         public void AddSegment(Direction direction)
         {

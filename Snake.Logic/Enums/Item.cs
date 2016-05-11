@@ -8,6 +8,6 @@ namespace Snake.Logic.Enums
 {
     public enum Item
     {
-        SnakeSegment, Prize
+        SnakeSegment, Prize, Border, Zerro
     }
 }

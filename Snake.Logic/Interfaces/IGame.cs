@@ -9,12 +9,14 @@ namespace Snake.Logic.Interfaces
 {
     public interface IGame
     {
-        void Initialization(int x, int y);
+        void Initialization();
         void Start();
         void Step();
         void Stop();
-        void Intstruction(Direction direction);
+        void Instruction(Direction direction);
+        Action<Point, Item> Draw { get; set; }
 
         GameState State { get; }
+
     }
 }
