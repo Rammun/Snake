@@ -63,8 +63,8 @@ namespace Snake.Logic
             //    Stop();
             //}
 
-            snake.DeleteSegment();
             Draw(snake.Segments.First(), Item.Zerro);
+            snake.DeleteSegment();
         }
 
         public void Stop()
@@ -90,18 +90,18 @@ namespace Snake.Logic
 
         private Point PrizeFactory()
         {
-            return new Point { X = rnd.Next(0, SIZE_X), Y = rnd.Next(0, SIZE_Y) };
+            return new Point { X = rnd.Next(1, SIZE_X), Y = rnd.Next(1, SIZE_Y) };
         }
 
         private void BorderDraw()
         {
-            for (int x = 0; x < SIZE_X; x++)
+            for (int x = 0; x <= SIZE_X; x++)
             {
                 Draw(new Point(x, 0), Item.Border);
                 Draw(new Point(x, SIZE_Y), Item.Border);
             }
 
-            for (int y = 0; y < SIZE_Y; y++)
+            for (int y = 1; y < SIZE_Y; y++)
             {
                 Draw(new Point(0, y), Item.Border);
                 Draw(new Point(SIZE_X, y), Item.Border);

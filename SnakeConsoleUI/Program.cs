@@ -21,7 +21,7 @@ namespace SnakeConsoleUI
 
             game.Draw = Draw;
             timer = new Timer();
-            timer.Interval = 500;
+            timer.Interval = 100;
             timer.AutoReset = true;
             timer.Elapsed += new ElapsedEventHandler(StepMethod);
 
@@ -31,27 +31,24 @@ namespace SnakeConsoleUI
 
             while(true)
             {
-                //if (Console.KeyAvailable == true)
-                //{
-                    switch (Console.ReadKey(true).Key)
-                    {
-                        case ConsoleKey.LeftArrow:
-                            game.Instruction(Direction.Left);
-                            break;
-                        case ConsoleKey.RightArrow:
-                            game.Instruction(Direction.Right);
-                            break;
-                        case ConsoleKey.DownArrow:
-                            game.Instruction(Direction.Down);
-                            break;
-                        case ConsoleKey.UpArrow:
-                            game.Instruction(Direction.Up);
-                            break;
-                        default:
-                            game.Instruction(Direction.Error);
-                            break;
-                    }
-                //}
+                switch (Console.ReadKey(true).Key)
+                {
+                    case ConsoleKey.LeftArrow:
+                        game.Instruction(Direction.Left);
+                        break;
+                    case ConsoleKey.RightArrow:
+                        game.Instruction(Direction.Right);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        game.Instruction(Direction.Down);
+                        break;
+                    case ConsoleKey.UpArrow:
+                        game.Instruction(Direction.Up);
+                        break;
+                    default:
+                        game.Instruction(Direction.Error);
+                        break;
+                }
 
                 if (game.State == GameState.End)
                 {
