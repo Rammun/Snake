@@ -1,0 +1,25 @@
+﻿<Window x:Class="SnakeWPFUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" x:Name="GameWindow" KeyDown="GameWindow_KeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"></RowDefinition>
+            <RowDefinition Height="22*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="ButtonStart" Grid.Row="0"
+                Content="Начать"
+                HorizontalAlignment="Left"
+                Width="100"
+                FontFamily="Tahoma"
+                FontSize="20"
+                FontStyle="Italic"
+                Margin="10,10,0,10" Click="ButtonStart_Click"/>
+        <UniformGrid x:Name="AreaGrid" Grid.Row="1">
+            <!--<UniformGrid.DataContext>
+                <Binding Source="{game}"></Binding>
+            </UniformGrid.DataContext>-->
+        </UniformGrid>
+
+    </Grid>
+</Window>

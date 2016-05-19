@@ -48,19 +48,18 @@ namespace SnakeConsoleUI
                     default:
                         game.Instruction(Direction.Error);
                         break;
-                }
-
-                if (game.State == GameState.End)
-                {
-                    timer.Stop();
-                    game.Stop();
-                }
+                }                
             }
-
         }
 
         static void StepMethod(object source, ElapsedEventArgs e)
         {
+            if (game.State == GameState.End)
+            {
+                timer.Stop();
+                game.Stop();
+                Console.WriteLine("GAME OVER");
+            }
             game.Step();
         }
 

@@ -24,16 +24,17 @@ namespace Snake.Logic
         public Action<Point, Item> Draw { get; set; }
 
         public SnakeGame()
-        {
-            snake = new Snake(SNAKE_LENGTH);
-            currentPrize = PrizeFactory();
-            currentDirection = Direction.Right;
-            countPrize = 0;
+        {            
             Draw = (x,y) => { };
         }
 
         public void Initialization()
         {
+            snake = new Snake(SNAKE_LENGTH);
+            currentPrize = PrizeFactory();
+            currentDirection = Direction.Right;
+            countPrize = 0;
+
             BorderDraw();
             Draw(currentPrize, Item.Prize);
             SnakeDraw();
@@ -51,17 +52,17 @@ namespace Snake.Logic
             snake.AddSegment(currentDirection);
             Draw(snake.Segments.Last(), Item.SnakeSegment);
 
-            if(snake.EqualsNewSegment(currentPrize))
+            if(snake.Segments.Last().Equals(currentPrize))
             {
                 countPrize++;
                 currentPrize = PrizeFactory();
                 Draw(currentPrize, Item.Prize);
                 return;
             }
-            //else if(snake.IsSegment() || snake.IsRegion(SIZE_X, SIZE_Y))
-            //{
-            //    Stop();
-            //}
+            else if (IsSegment() || IsRegion())
+            {
+                Stop();
+            }
 
             Draw(snake.Segments.First(), Item.Zerro);
             snake.DeleteSegment();
@@ -90,7 +91,12 @@ namespace Snake.Logic
 
         private Point PrizeFactory()
         {
-            return new Point { X = rnd.Next(1, SIZE_X), Y = rnd.Next(1, SIZE_Y) };
+            var prize = snake.Segments.ElementAt(0);
+            while(snake.Segments.Contains(prize))
+            {
+                prize = new Point { X = rnd.Next(1, SIZE_X), Y = rnd.Next(1, SIZE_Y) };
+            }
+            return prize;
         }
 
         private void BorderDraw()
@@ -116,5 +122,16 @@ namespace Snake.Logic
             }
         }
 
+        private bool IsSegment()
+        {
+            var c = snake.Segments.Count();
+            return snake.Segments.Take(c - 1).Contains(snake.Segments.Last());
+        }
+
+        private bool IsRegion()
+        {
+            var segment = snake.Segments.Last();
+            return (segment.X <= 0 || segment.X >= SIZE_X || segment.Y <= 0 || segment.Y >= SIZE_Y);
+        }
     }
 }

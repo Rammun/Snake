@@ -22,57 +22,50 @@ namespace Snake.Logic
     public class Snake
     {
         Queue<Point> segments;
+        event EventHandler snakeChange;
 
         public Snake(int length)
         {
             segments = new Queue<Point>();
+            snakeChange = (x, y) => { };
+
             for(int i = 1; i <= length; i++)
-            {
                 segments.Enqueue(new Point(x: i));
-            }
         }
 
         public IEnumerable<Point> Segments { get { return segments; } }
 
         public void AddSegment(Direction direction)
         {
-            Point newSegment = segments.Last();
+            var newSegment = segments.Last();
 
             switch(direction)
             {
-                case Direction.Up : newSegment.Y -= 1; break;
-                case Direction.Down: newSegment.Y += 1; break;
-                case Direction.Left: newSegment.X -= 1; break;
-                case Direction.Right: newSegment.X += 1; break;
+                case Direction.Up : newSegment.Y-- ; break;
+                case Direction.Down: newSegment.Y++ ; break;
+                case Direction.Left: newSegment.X-- ; break;
+                case Direction.Right: newSegment.X++ ; break;
             }
 
             segments.Enqueue(newSegment);
-        }
-
-        public bool EqualsNewSegment(Point point)
-        {
-            return point.Equals(segments.Last());
-        }
-
-        public bool IsSegment()
-        {
-            return segments.Any(s => s.Equals(segments.Last()));
-        }
-
-        public Point GetNewSegment()
-        {
-            return segments.Last();
-        }
-
-        public bool IsRegion(int size_x, int size_y)
-        {
-            var segment = segments.Last();
-            return !(segment.X < 0 || segment.X >= size_x || segment.Y < 0 || segment.Y >= size_y);
-        }
+            onChange(new Arg { Segment = newSegment });
+        }        
 
         public Point DeleteSegment()
         {
-            return segments.Dequeue();
+            var segment = segments.Dequeue();
+            onChange(new Arg { Segment = segment });
+            return segment;
+        }
+
+        public class Arg : EventArgs
+        {
+            public Point Segment { get; set; }
+        }
+
+        public void onChange(Arg point)
+        {
+            snakeChange(this, point);
         }
     }
 }
