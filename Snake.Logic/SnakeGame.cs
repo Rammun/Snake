@@ -13,7 +13,7 @@ namespace Snake.Logic
         static Random rnd = new Random();
         const int SIZE_X = 50;
         const int SIZE_Y = 22;
-        const int SNAKE_LENGTH = 4;
+        const int SNAKE_LENGTH = 3;
 
         Snake snake;
         Point currentPrize;

@@ -22,12 +22,10 @@ namespace Snake.Logic
     public class Snake
     {
         Queue<Point> segments;
-        event EventHandler snakeChange;
 
         public Snake(int length)
         {
             segments = new Queue<Point>();
-            snakeChange = (x, y) => { };
 
             for(int i = 1; i <= length; i++)
                 segments.Enqueue(new Point(x: i));
@@ -48,24 +46,12 @@ namespace Snake.Logic
             }
 
             segments.Enqueue(newSegment);
-            onChange(new Arg { Segment = newSegment });
         }        
 
         public Point DeleteSegment()
         {
             var segment = segments.Dequeue();
-            onChange(new Arg { Segment = segment });
             return segment;
-        }
-
-        public class Arg : EventArgs
-        {
-            public Point Segment { get; set; }
-        }
-
-        public void onChange(Arg point)
-        {
-            snakeChange(this, point);
         }
     }
 }
